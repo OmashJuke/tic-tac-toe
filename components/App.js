@@ -1,24 +1,6 @@
 import React,{ Component } from 'react';
+import {connect} from 'react-redux';
 
-// //origin js
-// const App = function App() {
-//   return React.createElement(
-//     'div',
-//     null,
-//     'Hi World1'
-//   );
-// };
-
-// // class
-// class App extends React {
-//   render() {
-//     return (
-//       <div>Hi World</div>
-//     )
-//   }
-// }
-
-// arrow
 
 const style = {
   row: {
@@ -148,4 +130,15 @@ class App extends Component {
       return null;
     }
 
-export default App;
+
+App.propTypes = {
+  target: React.PropTypes.string.isRequired,
+  count: React.PropTypes.number.isRequired,
+  setCount: React.PropTypes.func.isRequired
+};
+
+
+export default connect(
+  store => ({battletable: store.battletable}),
+  dispatch => ({ setCount: (battletable) => dispatch({type:'INC', battletable})})
+)(App);
