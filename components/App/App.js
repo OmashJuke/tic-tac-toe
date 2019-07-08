@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import {connect} from 'react-redux';
-import Battlefield from './Battlefiled/Battlefield.js'
+import Battlefield from '../Battlefiled/Battlefield.js'
 
 
 
@@ -22,10 +22,15 @@ class App extends Component {
       users: null
     };
   }
+
   render() {
+  console.log(this.props)
   return (
+  <div>
+  <button  onClick={this.props.setElement}>er</button>
   <Battlefield>
   </Battlefield>
+  </div>
   )
   }
   }
@@ -42,5 +47,5 @@ class App extends Component {
 
 export default connect(
   store => ({battletable: store.battletable}),
-  dispatch => ({ setCount: (battletable) => dispatch({type:'INC', battletable})})
+  dispatch => ({ setElement: () => dispatch({type:'INC', element:"X"})})
 )(App);

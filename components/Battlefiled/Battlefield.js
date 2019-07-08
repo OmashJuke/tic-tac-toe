@@ -1,6 +1,6 @@
 import React,{ Component } from 'react';
 import {connect} from 'react-redux';
-import ElementBattlefield from './ElementBattlefield.js'
+import ElementBattlefield from '../ElementBattlefield.js'
 
 
 
@@ -31,11 +31,15 @@ class  Battlefield extends React.Component{
         }
 
          handleClick(i) {
+            //console.log(this.props.setElement)
+           // debugger;
+           // const a= ()=>this.props.setElement;
             const element = this.state.element.slice();
             if (calculateWinner(element) || element[i]) {
 
-                return;
+                return ;
             }
+
             element[i] = this.state.xIsNext ? 'X' : 'O';
                 this.setState({
                   element: element,
@@ -60,6 +64,7 @@ class  Battlefield extends React.Component{
     render() {
   return(
   <div>
+    <div>{this.props.battletable[0][0]}</div>
     <div className="Battlefield-row" style={style.row}>
       <div> {this.toElement(0)}</div>
       <div>{this.toElement(1)} </div>
@@ -106,4 +111,13 @@ function calculateWinner(element) {
     }
 
 
-export default Battlefield;
+Battlefield.propTypes = {
+  target: React.PropTypes.string.isRequired,
+  setElement: React.PropTypes.func.isRequired
+};
+
+
+export default connect(
+store => ({battletable: store.battletable}),
+dispatch => ({ setElement: () => dispatch({type:'INC', element:"p"})})
+)(Battlefield);
